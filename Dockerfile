@@ -69,8 +69,8 @@ USER tomcat
 RUN curl -o $CATALINA_HOME/webapps/fits.war $FITS_SERVLET_URL-$FITSSERVLET_VERSION.war && \
     mkdir $CATALINA_HOME/webapps/ROOT && \
     echo '<% response.sendRedirect("/fits/"); %>' > $CATALINA_HOME/webapps/ROOT/index.jsp
-    
-COPY web.xml "$CATALINA_HOME"/webapps/fits/WEB-INF/
+
+COPY web.xml $CATALINA_HOME/conf/web.xml
 
 # Expose our Volume and Ports
 VOLUME ["/processing"]
@@ -82,3 +82,4 @@ EXPOSE 8080 \
 
 # Start up Tomcat 8
 CMD ["/usr/bin/supervisord"]
+
